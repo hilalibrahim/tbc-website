@@ -41,6 +41,7 @@ model Package {
   shortDescription String?
   price           Float?
   priceType       String        @default("ONE_TIME") // MONTHLY, ONE_TIME, CUSTOM, YEARLY
+  startsFrom      Boolean       @default(false) // Show "Starts from" prefix for variable pricing
   features        String        // JSON stored as string
   isActive        Boolean       @default(true)
   isFeatured      Boolean       @default(false)
@@ -171,7 +172,7 @@ model Invoice {
   tax             Float         @default(0)
   discount        Float         @default(0)
   total           Float
-  currency        String        @default("USD")
+  currency        String        @default("INR")
   notes           String?
   terms           String?
   items           InvoiceItem[]
@@ -223,21 +224,32 @@ model Testimonial {
   updatedAt   DateTime @updatedAt
 }
 
-// Team Members
+// Team Members / Employees
 model TeamMember {
-  id          String   @id @default(cuid())
-  name        String
-  role        String
-  bio         String?
-  imageUrl    String?
-  email       String?
-  linkedin    String?
-  twitter     String?
-  github      String?
-  displayOrder Int     @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String        @id @default(cuid())
+  employeeId    String?       @unique // Employee ID/Code
+  name          String
+  role          String        // Job title/role
+  department    String?       // Department
+  bio           String?
+  imageUrl      String?
+  email         String?       @unique
+  phone         String?
+  address       String?
+  linkedin      String?
+  twitter       String?
+  github        String?
+  hireDate      DateTime?     // Date of hire
+  employmentType String?      // FULL_TIME, PART_TIME, CONTRACT, INTERN
+  salary        Float?        // Monthly/annual salary
+  salaryType    String?       // MONTHLY, YEARLY, HOURLY
+  displayOrder  Int           @default(0)
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  payrolls      Payroll[]
+  leaves        Leave[]
+  assignments   TaskAssignment[]
 }
 
 // Services (Individual services that can be added to packages)
@@ -282,4 +294,55 @@ model PageView {
   userAgent String?
   ipAddress String?
   createdAt DateTime @default(now())
+}
+
+// Payroll Management
+model Payroll {
+  id            String        @id @default(cuid())
+  employeeId    String
+  employee      TeamMember    @relation(fields: [employeeId], references: [id])
+  period        String        // e.g., "2024-01" for January 2024
+  baseSalary    Float
+  bonuses       Float         @default(0)
+  deductions   Float         @default(0)
+  tax           Float         @default(0)
+  netPay        Float
+  status        String        @default("PENDING") // PENDING, PROCESSED, PAID
+  paymentDate   DateTime?
+  paymentMethod String?       // BANK_TRANSFER, CHECK, CASH
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// Leave Management
+model Leave {
+  id            String        @id @default(cuid())
+  employeeId    String
+  employee      TeamMember    @relation(fields: [employeeId], references: [id])
+  type          String        // SICK, VACATION, PERSONAL, MATERNITY, PATERNITY
+  startDate     DateTime
+  endDate       DateTime
+  days          Int
+  status        String        @default("PENDING") // PENDING, APPROVED, REJECTED
+  reason        String?
+  approvedBy    String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// Task/Project Assignments
+model TaskAssignment {
+  id            String        @id @default(cuid())
+  employeeId    String
+  employee      TeamMember    @relation(fields: [employeeId], references: [id])
+  projectId     String?       // Link to Project if needed
+  title         String
+  description   String?
+  status        String        @default("ASSIGNED") // ASSIGNED, IN_PROGRESS, COMPLETED
+  priority      String?       // LOW, MEDIUM, HIGH, URGENT
+  dueDate       DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }

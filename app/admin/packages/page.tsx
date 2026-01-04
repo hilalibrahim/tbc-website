@@ -9,6 +9,7 @@ interface Package {
   slug: string
   price: number | null
   priceType: string
+  startsFrom: boolean
   isActive: boolean
   isFeatured: boolean
   createdAt: string
@@ -62,7 +63,7 @@ export default function PackagesPage() {
       header: 'Price',
       accessor: (row: Package) =>
         row.price
-          ? `$${row.price.toFixed(2)}/${row.priceType.toLowerCase()}`
+          ? `${row.startsFrom ? 'Starts from ' : ''}₹${row.price.toFixed(2)}/${row.priceType.toLowerCase()}`
           : 'Custom',
     },
     {

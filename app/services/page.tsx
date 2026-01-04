@@ -12,7 +12,7 @@ export default function ServicesPage() {
     {
       title: 'Starter',
       description: 'Perfect for small businesses getting started with digital marketing.',
-      price: '$999/mo',
+      price: '₹99,999/mo',
       features: [
         'SEO Audit & Optimization',
         '5 Blog Posts per Month',
@@ -25,7 +25,7 @@ export default function ServicesPage() {
     {
       title: 'Professional',
       description: 'Comprehensive marketing solution for growing businesses.',
-      price: '$2,499/mo',
+      price: '₹2,49,999/mo',
       features: [
         'Everything in Starter',
         '10 Blog Posts per Month',

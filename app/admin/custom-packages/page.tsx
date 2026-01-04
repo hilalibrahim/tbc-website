@@ -59,7 +59,7 @@ export default function CustomPackagesPage() {
     },
     {
       header: 'Total Price',
-      accessor: (row: CustomPackage) => `$${row.totalPrice.toFixed(2)}`,
+      accessor: (row: CustomPackage) => `₹${row.totalPrice.toFixed(2)}`,
     },
     {
       header: 'Status',

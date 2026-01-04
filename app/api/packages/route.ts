@@ -9,6 +9,7 @@ const packageSchema = z.object({
   shortDescription: z.string().optional(),
   price: z.number().optional(),
   priceType: z.enum(['MONTHLY', 'ONE_TIME', 'CUSTOM', 'YEARLY']),
+  startsFrom: z.boolean().default(false),
   features: z.array(z.any()),
   isActive: z.boolean().default(true),
   isFeatured: z.boolean().default(false),
@@ -35,7 +36,22 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    return NextResponse.json(packages)
+    // Parse features JSON strings for client
+    const packagesWithParsedFeatures = packages.map(pkg => {
+      let features = []
+      if (typeof pkg.features === 'string') {
+        try {
+          features = pkg.features ? JSON.parse(pkg.features) : []
+        } catch {
+          features = []
+        }
+      } else {
+        features = pkg.features || []
+      }
+      return { ...pkg, features }
+    })
+
+    return NextResponse.json(packagesWithParsedFeatures)
   } catch (error) {
     console.error('Error fetching packages:', error)
     return NextResponse.json(
@@ -51,8 +67,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const data = packageSchema.parse(body)
 
+    // Convert features array to JSON string for SQLite
+    const packageData = {
+      ...data,
+      features: typeof data.features === 'string' ? data.features : JSON.stringify(data.features || []),
+    }
+
     const pkg = await prisma.package.create({
-      data,
+      data: packageData,
     })
 
     return NextResponse.json(pkg, { status: 201 })

@@ -19,7 +19,7 @@ const invoiceSchema = z.object({
   discount: z.number().default(0),
   notes: z.string().optional(),
   terms: z.string().optional(),
-  currency: z.string().default('USD'),
+  currency: z.string().default('INR'),
 })
 
 // GET all invoices (admin only)

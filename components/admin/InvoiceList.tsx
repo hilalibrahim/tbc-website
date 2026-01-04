@@ -152,7 +152,7 @@ export default function InvoiceList() {
                       {new Date(invoice.dueDate).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-foreground">
-                      {invoice.currency} {invoice.total.toFixed(2)}
+                      ₹{invoice.total.toFixed(2)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span

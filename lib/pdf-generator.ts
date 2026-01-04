@@ -132,12 +132,12 @@ export async function generateInvoicePDF(invoice: Invoice): Promise<Buffer> {
     doc.text(item.description, margin, yPosition)
     doc.text(item.quantity.toString(), margin + 100, yPosition)
     doc.text(
-      `${invoice.currency} ${item.unitPrice.toFixed(2)}`,
+      `₹${item.unitPrice.toFixed(2)}`,
       margin + 120,
       yPosition
     )
     doc.text(
-      `${invoice.currency} ${item.total.toFixed(2)}`,
+      `₹${item.total.toFixed(2)}`,
       pageWidth - margin,
       yPosition,
       { align: 'right' }
@@ -152,7 +152,7 @@ export async function generateInvoicePDF(invoice: Invoice): Promise<Buffer> {
   doc.setFont('helvetica', 'normal')
   doc.text('Subtotal:', totalsX, yPosition, { align: 'right' })
   doc.text(
-    `${invoice.currency} ${invoice.subtotal.toFixed(2)}`,
+    `₹${invoice.subtotal.toFixed(2)}`,
     pageWidth - margin,
     yPosition,
     { align: 'right' }
@@ -162,7 +162,7 @@ export async function generateInvoicePDF(invoice: Invoice): Promise<Buffer> {
   if (invoice.discount > 0) {
     doc.text('Discount:', totalsX, yPosition, { align: 'right' })
     doc.text(
-      `-${invoice.currency} ${invoice.discount.toFixed(2)}`,
+      `-₹${invoice.discount.toFixed(2)}`,
       pageWidth - margin,
       yPosition,
       { align: 'right' }
@@ -173,7 +173,7 @@ export async function generateInvoicePDF(invoice: Invoice): Promise<Buffer> {
   if (invoice.tax > 0) {
     doc.text('Tax:', totalsX, yPosition, { align: 'right' })
     doc.text(
-      `${invoice.currency} ${invoice.tax.toFixed(2)}`,
+      `₹${invoice.tax.toFixed(2)}`,
       pageWidth - margin,
       yPosition,
       { align: 'right' }
@@ -186,7 +186,7 @@ export async function generateInvoicePDF(invoice: Invoice): Promise<Buffer> {
   doc.setFontSize(12)
   doc.text('Total:', totalsX, yPosition, { align: 'right' })
   doc.text(
-    `${invoice.currency} ${invoice.total.toFixed(2)}`,
+    `₹${invoice.total.toFixed(2)}`,
     pageWidth - margin,
     yPosition,
     { align: 'right' }
@@ -204,7 +204,7 @@ export async function generateInvoicePDF(invoice: Invoice): Promise<Buffer> {
     invoice.payments.forEach((payment) => {
       if (payment.status === 'COMPLETED') {
         doc.text(
-          `${payment.paymentMethod}: ${invoice.currency} ${payment.amount.toFixed(2)}`,
+          `${payment.paymentMethod}: ₹${payment.amount.toFixed(2)}`,
           margin + 10,
           yPosition
         )

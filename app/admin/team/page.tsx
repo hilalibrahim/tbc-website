@@ -5,9 +5,16 @@ import DataTable from '@/components/admin/DataTable'
 
 interface TeamMember {
   id: string
+  employeeId: string | null
   name: string
   role: string
+  department: string | null
   email: string | null
+  phone: string | null
+  salary: number | null
+  salaryType: string | null
+  employmentType: string | null
+  hireDate: string | null
   isActive: boolean
   displayOrder: number
 }
@@ -54,9 +61,30 @@ export default function TeamPage() {
   }
 
   const columns = [
+    { header: 'Employee ID', accessor: 'employeeId' || 'N/A' },
     { header: 'Name', accessor: 'name' },
     { header: 'Role', accessor: 'role' },
+    { header: 'Department', accessor: 'department' || 'N/A' },
     { header: 'Email', accessor: 'email' || 'N/A' },
+    {
+      header: 'Salary',
+      accessor: (row: TeamMember) =>
+        row.salary
+          ? `₹${row.salary.toFixed(2)}/${row.salaryType?.toLowerCase() || 'monthly'}`
+          : 'N/A',
+    },
+    {
+      header: 'Type',
+      accessor: (row: TeamMember) => {
+        const types: Record<string, string> = {
+          FULL_TIME: 'Full Time',
+          PART_TIME: 'Part Time',
+          CONTRACT: 'Contract',
+          INTERN: 'Intern',
+        }
+        return types[row.employmentType || ''] || row.employmentType || 'N/A'
+      },
+    },
     {
       header: 'Status',
       accessor: (row: TeamMember) => (
@@ -71,16 +99,16 @@ export default function TeamPage() {
         </span>
       ),
     },
-    { header: 'Order', accessor: 'displayOrder' },
   ]
 
   return (
     <DataTable
-      title="Team Members"
+      title="Team Members / Employees"
       columns={columns}
       data={teamMembers}
       loading={loading}
       createLink="/admin/team/new"
+      viewLink={(row) => `/admin/team/${row.id}`}
       editLink={(row) => `/admin/team/${row.id}/edit`}
       onDelete={handleDelete}
     />

@@ -9,6 +9,7 @@ const packageSchema = z.object({
   shortDescription: z.string().optional(),
   price: z.number().optional(),
   priceType: z.enum(['MONTHLY', 'ONE_TIME', 'CUSTOM', 'YEARLY']).optional(),
+  startsFrom: z.boolean().optional(),
   features: z.array(z.any()).optional(),
   isActive: z.boolean().optional(),
   isFeatured: z.boolean().optional(),
@@ -36,7 +37,24 @@ export async function GET(
       )
     }
 
-    return NextResponse.json(pkg)
+    // Parse features JSON string for client
+    let features = []
+    if (typeof pkg.features === 'string') {
+      try {
+        features = pkg.features ? JSON.parse(pkg.features) : []
+      } catch {
+        features = []
+      }
+    } else {
+      features = pkg.features || []
+    }
+    
+    const packageWithParsedFeatures = {
+      ...pkg,
+      features,
+    }
+
+    return NextResponse.json(packageWithParsedFeatures)
   } catch (error) {
     console.error('Error fetching package:', error)
     return NextResponse.json(
@@ -56,9 +74,17 @@ export async function PATCH(
     const body = await request.json()
     const data = packageSchema.parse(body)
 
+    // Convert features array to JSON string for SQLite
+    const updateData: any = { ...data }
+    if (data.features !== undefined) {
+      updateData.features = typeof data.features === 'string' 
+        ? data.features 
+        : JSON.stringify(data.features)
+    }
+
     const pkg = await prisma.package.update({
       where: { id },
-      data,
+      data: updateData,
     })
 
     return NextResponse.json(pkg)

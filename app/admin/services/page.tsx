@@ -60,7 +60,7 @@ export default function ServicesPage() {
     {
       header: 'Base Price',
       accessor: (row: Service) =>
-        row.basePrice ? `$${row.basePrice.toFixed(2)}` : 'N/A',
+        row.basePrice ? `₹${row.basePrice.toFixed(2)}` : 'N/A',
     },
     {
       header: 'Status',

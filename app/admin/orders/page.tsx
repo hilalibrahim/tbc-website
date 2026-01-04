@@ -71,7 +71,7 @@ export default function OrdersPage() {
     },
     {
       header: 'Amount',
-      accessor: (row: Order) => `$${row.finalAmount.toFixed(2)}`,
+      accessor: (row: Order) => `₹${row.finalAmount.toFixed(2)}`,
     },
     {
       header: 'Status',

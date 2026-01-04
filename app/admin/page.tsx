@@ -43,7 +43,7 @@ export default async function AdminDashboard() {
     },
     {
       title: 'Total Revenue',
-      value: `$${stats.totalRevenue.toLocaleString()}`,
+      value: `₹${stats.totalRevenue.toLocaleString()}`,
       change: '+15%',
       icon: '💰',
       href: '/admin/invoices',

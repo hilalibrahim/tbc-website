@@ -29,7 +29,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
     discount: 0,
     notes: '',
     terms: '',
-    currency: 'USD',
+    currency: 'INR',
   })
 
   useEffect(() => {
@@ -259,7 +259,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                 />
               </div>
               <div className="col-span-1 text-right font-medium text-foreground">
-                {formData.currency} {(item.quantity * item.unitPrice).toFixed(2)}
+                ₹{(item.quantity * item.unitPrice).toFixed(2)}
               </div>
               <div className="col-span-1">
                 {formData.items.length > 1 && (
@@ -284,7 +284,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
           <div className="flex justify-between">
             <span className="text-secondary">Subtotal:</span>
             <span className="font-medium text-foreground">
-              {formData.currency} {totals.subtotal.toFixed(2)}
+              ₹{totals.subtotal.toFixed(2)}
             </span>
           </div>
           
@@ -302,7 +302,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
               className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
             <div className="text-right mt-1 text-sm text-secondary">
-              Discount: {formData.currency} {totals.discount.toFixed(2)}
+              Discount: ₹{totals.discount.toFixed(2)}
             </div>
           </div>
 
@@ -319,14 +319,14 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
               className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
             <div className="text-right mt-1 text-sm text-secondary">
-              Tax: {formData.currency} {totals.tax.toFixed(2)}
+              Tax: ₹{totals.tax.toFixed(2)}
             </div>
           </div>
 
           <div className="pt-4 border-t border-border flex justify-between text-lg font-bold">
             <span className="text-foreground">Total:</span>
             <span className="text-foreground">
-              {formData.currency} {totals.total.toFixed(2)}
+              ₹{totals.total.toFixed(2)}
             </span>
           </div>
         </div>

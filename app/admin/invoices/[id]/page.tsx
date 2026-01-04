@@ -188,10 +188,10 @@ export default function InvoiceDetailPage() {
                     <td className="px-4 py-3 text-secondary">{item.description}</td>
                     <td className="px-4 py-3 text-right text-secondary">{item.quantity}</td>
                     <td className="px-4 py-3 text-right text-secondary">
-                      {invoice.currency} {item.unitPrice.toFixed(2)}
+                      ₹{item.unitPrice.toFixed(2)}
                     </td>
                     <td className="px-4 py-3 text-right font-medium text-foreground">
-                      {invoice.currency} {item.total.toFixed(2)}
+                      ₹{item.total.toFixed(2)}
                     </td>
                   </tr>
                 ))}
@@ -204,33 +204,33 @@ export default function InvoiceDetailPage() {
             <div className="ml-auto max-w-xs space-y-2">
               <div className="flex justify-between text-secondary">
                 <span>Subtotal:</span>
-                <span>{invoice.currency} {invoice.subtotal.toFixed(2)}</span>
+                <span>₹{invoice.subtotal.toFixed(2)}</span>
               </div>
               {invoice.discount > 0 && (
                 <div className="flex justify-between text-secondary">
                   <span>Discount:</span>
-                  <span>-{invoice.currency} {invoice.discount.toFixed(2)}</span>
+                  <span>-₹{invoice.discount.toFixed(2)}</span>
                 </div>
               )}
               {invoice.tax > 0 && (
                 <div className="flex justify-between text-secondary">
                   <span>Tax:</span>
-                  <span>{invoice.currency} {invoice.tax.toFixed(2)}</span>
+                  <span>₹{invoice.tax.toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between border-t border-border pt-2 text-lg font-bold text-foreground">
                 <span>Total:</span>
-                <span>{invoice.currency} {invoice.total.toFixed(2)}</span>
+                <span>₹{invoice.total.toFixed(2)}</span>
               </div>
               {totalPaid > 0 && (
                 <>
                   <div className="flex justify-between text-green-600">
                     <span>Paid:</span>
-                    <span>{invoice.currency} {totalPaid.toFixed(2)}</span>
+                    <span>₹{totalPaid.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-red-600">
                     <span>Remaining:</span>
-                    <span>{invoice.currency} {remaining.toFixed(2)}</span>
+                    <span>₹{remaining.toFixed(2)}</span>
                   </div>
                 </>
               )}
@@ -253,7 +253,7 @@ export default function InvoiceDetailPage() {
                   </div>
                   <div className="text-right">
                     <p className="font-medium text-foreground">
-                      {invoice.currency} {payment.amount.toFixed(2)}
+                      ₹{payment.amount.toFixed(2)}
                     </p>
                     <p className={`text-sm ${
                       payment.status === 'COMPLETED' ? 'text-green-600' :

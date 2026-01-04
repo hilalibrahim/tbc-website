@@ -53,7 +53,7 @@ export async function createInvoiceFromOrder(orderId: string) {
       discount,
       tax,
       total,
-      currency: 'USD',
+      currency: 'INR',
       status: 'DRAFT',
       items: {
         create: items,
