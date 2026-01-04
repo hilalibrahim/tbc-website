@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -9,7 +10,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           {/* Company Info */}
           <div>
-            <h3 className="mb-4 text-xl font-heading text-white">Marketing Agency</h3>
+               <Image
+                         src="/logotbc.png"
+                         alt="Logo"
+                         width={150}
+                         height={60}
+                         className="h-auto w-auto filter invert"
+                         priority
+                       />
             <p className="text-gray-300 leading-relaxed">
               Building digital solutions with precision and excellence.
             </p>
@@ -54,7 +62,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-          <p>© {currentYear} Marketing Agency. All rights reserved.</p>
+          <p>© {currentYear} The Big Connection | Pitstopia. All rights reserved.</p>
         </div>
       </div>
     </footer>

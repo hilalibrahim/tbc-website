@@ -1,0 +1,285 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User/Admin Authentication
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  role          String    @default("ADMIN") // ADMIN, MANAGER, VIEWER
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  blogPosts     BlogPost[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+// Service Packages
+model Package {
+  id              String        @id @default(cuid())
+  name            String
+  slug            String        @unique
+  description     String
+  shortDescription String?
+  price           Float?
+  priceType       String        @default("ONE_TIME") // MONTHLY, ONE_TIME, CUSTOM, YEARLY
+  features        String        // JSON stored as string
+  isActive        Boolean       @default(true)
+  isFeatured      Boolean       @default(false)
+  displayOrder    Int           @default(0)
+  discount        Float?        // Percentage discount (0-100)
+  originalPrice   Float?
+  imageUrl        String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  offers          Offer[]       @relation("PackageOffers")
+  customPackages  CustomPackage[]
+  orders          Order[]
+}
+
+// Custom Packages (User-built packages)
+model CustomPackage {
+  id          String              @id @default(cuid())
+  name        String
+  description String?
+  basePackageId String?
+  basePackage Package?            @relation(fields: [basePackageId], references: [id])
+  services    String              // JSON stored as string
+  totalPrice  Float
+  status      String              @default("PENDING") // PENDING, APPROVED, REJECTED, QUOTED
+  leadId      String?
+  lead        Lead?               @relation(fields: [leadId], references: [id])
+  notes       String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+// Projects/Portfolio Showcase
+model Project {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  description   String
+  category      String
+  clientName    String?
+  clientLogo    String?
+  results       String        // JSON stored as string
+  services      String        // JSON stored as string
+  images        String?       // JSON stored as string
+  featuredImage String?
+  caseStudy     String?
+  isPublished   Boolean       @default(false)
+  featured      Boolean       @default(false)
+  displayOrder  Int           @default(0)
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  testimonials  Testimonial[]
+}
+
+// Offers/Promotions
+model Offer {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  discount    Float     // Percentage (0-100)
+  code        String?   @unique // Promo code
+  validFrom   DateTime
+  validUntil  DateTime
+  isActive    Boolean   @default(true)
+  minPurchase Float?    // Minimum purchase amount
+  maxDiscount Float?   // Maximum discount amount
+  usageLimit  Int?     // Total usage limit
+  usedCount   Int      @default(0)
+  packages    Package[] @relation("PackageOffers")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// Leads/Contact Form Submissions
+model Lead {
+  id            String          @id @default(cuid())
+  name          String
+  email         String
+  phone         String?
+  company       String?
+  service       String?
+  packageId     String?
+  message       String?
+  status        String          @default("NEW") // NEW, CONTACTED, QUALIFIED, CONVERTED, LOST
+  source        String?         // Where they came from
+  customPackage CustomPackage[]
+  notes         String?
+  assignedTo    String?
+  orders        Order[]
+  invoices      Invoice[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+// Orders/Purchases
+model Order {
+  id              String        @id @default(cuid())
+  leadId          String
+  lead            Lead          @relation(fields: [leadId], references: [id])
+  packageId       String?
+  package         Package?      @relation(fields: [packageId], references: [id])
+  customPackageId String?
+  amount          Float
+  discount        Float?        @default(0)
+  finalAmount     Float
+  status          String        @default("PENDING") // PENDING, PAID, CANCELLED, REFUNDED
+  paymentMethod   String?
+  transactionId   String?
+  invoice         Invoice?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+// Invoice System
+model Invoice {
+  id              String        @id @default(cuid())
+  invoiceNumber   String        @unique
+  orderId         String?       @unique
+  order           Order?        @relation(fields: [orderId], references: [id])
+  leadId          String
+  lead            Lead          @relation(fields: [leadId], references: [id])
+  status          String        @default("DRAFT") // DRAFT, SENT, VIEWED, PAID, OVERDUE, CANCELLED, REFUNDED
+  issueDate       DateTime      @default(now())
+  dueDate         DateTime
+  paidDate        DateTime?
+  subtotal        Float
+  tax             Float         @default(0)
+  discount        Float         @default(0)
+  total           Float
+  currency        String        @default("USD")
+  notes           String?
+  terms           String?
+  items           InvoiceItem[]
+  payments        Payment[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  description String
+  quantity    Float    @default(1)
+  unitPrice   Float
+  total       Float
+  createdAt   DateTime @default(now())
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  invoiceId     String
+  invoice       Invoice       @relation(fields: [invoiceId], references: [id])
+  amount        Float
+  paymentMethod String        // "stripe", "paypal", "bank_transfer", "check", "cash"
+  transactionId String?       @unique
+  status        String        @default("PENDING") // PENDING, PROCESSING, COMPLETED, FAILED, REFUNDED
+  paidAt        DateTime?
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// Testimonials
+model Testimonial {
+  id          String   @id @default(cuid())
+  quote       String
+  author      String
+  company     String?
+  role        String?
+  rating      Int?     // 1-5 stars
+  imageUrl    String?
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id])
+  isPublished Boolean  @default(true)
+  featured    Boolean  @default(false)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Team Members
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?
+  imageUrl    String?
+  email       String?
+  linkedin    String?
+  twitter     String?
+  github      String?
+  displayOrder Int     @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Services (Individual services that can be added to packages)
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  icon        String?
+  category    String?
+  basePrice   Float?
+  isActive    Boolean  @default(true)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Blog Posts (Optional but recommended)
+model BlogPost {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  excerpt       String?
+  content       String
+  authorId      String?
+  author        User?    @relation(fields: [authorId], references: [id])
+  featuredImage String?
+  category      String?
+  tags          String?  // JSON stored as string
+  isPublished   Boolean  @default(false)
+  publishedAt   DateTime?
+  views         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Analytics/Page Views (Optional)
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  referrer  String?
+  userAgent String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+}

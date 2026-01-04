@@ -13,19 +13,19 @@ export const metadata = {
 export default function Home() {
   const services = [
     {
-      title: 'SEO Optimization',
-      description: 'Boost your search rankings with data-driven strategies.',
-      features: ['Keyword Research', 'On-Page SEO', 'Technical Audit'],
+      title: 'Website & App Development',
+      description: 'Build modern, responsive websites and mobile apps tailored to your needs.',
+      features: ['Web Design', 'App Development', 'UI/UX Design'],
     },
     {
-      title: 'Content Marketing',
-      description: 'Engaging content that converts visitors into customers.',
-      features: ['Blog Writing', 'Social Media', 'Email Campaigns'],
+      title: 'Content Creation',
+      description: 'Create compelling content that engages your audience and drives results.',
+      features: ['Video Production', 'Graphic Design', 'Copywriting'],
     },
     {
-      title: 'PPC Advertising',
-      description: 'Maximize ROI with targeted paid advertising campaigns.',
-      features: ['Google Ads', 'Social Ads', 'Conversion Tracking'],
+      title: 'Social Media Campaign',
+      description: 'Amplify your brand presence with strategic social media marketing.',
+      features: ['Strategy Planning', 'Content Scheduling', 'Engagement Management'],
     },
   ];
 
