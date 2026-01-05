@@ -62,7 +62,7 @@ export default function OffersPage() {
       header: 'Discount',
       accessor: (row: Offer) => `${row.discount}%`,
     },
-    { header: 'Code', accessor: 'code' || 'N/A' },
+    { header: 'Code', accessor: (row: Offer) => row.code || 'N/A' },
     {
       header: 'Valid Period',
       accessor: (row: Offer) =>
@@ -77,10 +77,10 @@ export default function OffersPage() {
       header: 'Status',
       accessor: (row: Offer) => (
         <span
-          className={`px-2 py-1 text-xs rounded-full ${
+          className={`px-2 py-1 text-xs font-semibold rounded-full ${
             row.isActive
-              ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#D9D9D9] border border-[#BFBFBF]/20'
+              : 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
           }`}
         >
           {row.isActive ? 'Active' : 'Inactive'}

@@ -27,14 +27,17 @@ export default function PackagesPage() {
     try {
       const res = await fetch('/api/packages')
       if (!res.ok) {
-        throw new Error('Failed to fetch packages')
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }))
+        console.error('API Error:', errorData)
+        throw new Error(errorData.error || `Failed to fetch packages: ${res.status} ${res.statusText}`)
       }
       const data = await res.json()
       // Ensure data is an array
       setPackages(Array.isArray(data) ? data : [])
     } catch (error) {
       console.error('Error fetching packages:', error)
-      setPackages([]) // Set empty array on error
+      // Set empty array on error but don't show error to user if it's just no data
+      setPackages([])
     } finally {
       setLoading(false)
     }
@@ -71,16 +74,16 @@ export default function PackagesPage() {
       accessor: (row: Package) => (
         <div className="flex gap-2">
           <span
-            className={`px-2 py-1 text-xs rounded-full ${
+            className={`px-2 py-1 text-xs font-semibold rounded-full ${
               row.isActive
-                ? 'bg-green-100 text-green-800'
-                : 'bg-gray-100 text-gray-800'
+                ? 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#D9D9D9] border border-[#BFBFBF]/20'
+                : 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
             }`}
           >
             {row.isActive ? 'Active' : 'Inactive'}
           </span>
           {row.isFeatured && (
-            <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
+            <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#BFBFBF] border border-[#BFBFBF]/20">
               Featured
             </span>
           )}

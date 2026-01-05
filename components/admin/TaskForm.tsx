@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Card from '@/components/Card'
+import { Save, X } from 'lucide-react'
 
 interface TaskFormProps {
   taskId?: string
@@ -117,15 +117,15 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card className="p-6">
-        <h3 className="text-2xl font-heading text-foreground mb-6">
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C] bg-clip-text text-transparent mb-6">
           {taskId ? 'Edit Task' : 'Assign New Task'}
         </h3>
 
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Employee *
               </label>
               <select
@@ -133,7 +133,7 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
                 onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })}
                 required
                 disabled={!!employeeId}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent disabled:bg-gray-100"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <option value="">Select Employee</option>
                 {employees.map((emp) => (
@@ -145,13 +145,13 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Project (Optional)
               </label>
               <select
                 value={formData.projectId}
                 onChange={(e) => setFormData({ ...formData, projectId: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               >
                 <option value="">No Project</option>
                 {projects.map((project) => (
@@ -164,7 +164,7 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Task Title *
             </label>
             <input
@@ -172,33 +172,33 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               required
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               placeholder="Enter task title"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Description
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={4}
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 resize-none"
               placeholder="Task description"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Status
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               >
                 <option value="ASSIGNED">Assigned</option>
                 <option value="IN_PROGRESS">In Progress</option>
@@ -207,13 +207,13 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Priority
               </label>
               <select
                 value={formData.priority}
                 onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               >
                 <option value="LOW">Low</option>
                 <option value="MEDIUM">Medium</option>
@@ -223,33 +223,35 @@ export default function TaskForm({ taskId, employeeId }: TaskFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Due Date
               </label>
               <input
                 type="date"
                 value={formData.dueDate}
                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
             </div>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <button
           type="submit"
           disabled={loading}
-          className="bg-accent text-white px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-accent-hover shadow-depth-3 hover:shadow-depth-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base w-full sm:w-auto"
         >
+          <Save className="w-4 h-4" />
           {loading ? 'Saving...' : taskId ? 'Update Task' : 'Assign Task'}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="bg-gray-200 text-gray-700 px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-gray-300"
+          className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#BFBFBF] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:text-[#D9D9D9] border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 text-sm sm:text-base w-full sm:w-auto"
         >
+          <X className="w-4 h-4" />
           Cancel
         </button>
       </div>

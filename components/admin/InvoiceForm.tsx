@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Card from '@/components/Card'
+import { Save, X, Plus, Trash2 } from 'lucide-react'
 
 interface InvoiceFormProps {
   invoiceId?: string
@@ -130,9 +130,6 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
   const updateItem = (index: number, field: string, value: any) => {
     const newItems = [...formData.items]
     newItems[index] = { ...newItems[index], [field]: value }
-    if (field === 'quantity' || field === 'unitPrice') {
-      newItems[index].total = newItems[index].quantity * newItems[index].unitPrice
-    }
     setFormData({ ...formData, items: newItems })
   }
 
@@ -156,19 +153,19 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card className="p-6">
-        <h3 className="text-2xl font-heading text-foreground mb-6">Invoice Details</h3>
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C] bg-clip-text text-transparent mb-6">Invoice Details</h3>
         
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Client *
             </label>
             <select
               value={formData.leadId}
               onChange={(e) => setFormData({ ...formData, leadId: e.target.value })}
               required
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
             >
               <option value="">Select a client</option>
               {leads.map((lead) => (
@@ -181,7 +178,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Issue Date *
               </label>
               <input
@@ -189,11 +186,11 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                 value={formData.issueDate}
                 onChange={(e) => setFormData({ ...formData, issueDate: e.target.value })}
                 required
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
             </div>
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Payment Terms (Days) *
               </label>
               <input
@@ -202,21 +199,22 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                 onChange={(e) => setFormData({ ...formData, dueDays: parseInt(e.target.value) || 30 })}
                 required
                 min="1"
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
             </div>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-6">
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-2xl font-heading text-foreground">Invoice Items</h3>
+          <h3 className="text-2xl font-bold text-[#D9D9D9]">Invoice Items</h3>
           <button
             type="button"
             onClick={addItem}
-            className="bg-accent text-white px-4 py-2 rounded-lg font-heading hover:bg-accent-hover transition-colors"
+            className="flex items-center gap-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-4 py-2 rounded-lg font-semibold hover:border-[#D9D9D9]/30 border border-[#BFBFBF]/20 transition-all duration-300"
           >
+            <Plus className="w-4 h-4" />
             Add Item
           </button>
         </div>
@@ -231,7 +229,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                   value={item.description}
                   onChange={(e) => updateItem(index, 'description', e.target.value)}
                   required
-                  className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 />
               </div>
               <div className="col-span-2">
@@ -243,7 +241,7 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                   required
                   min="0.01"
                   step="0.01"
-                  className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 />
               </div>
               <div className="col-span-3">
@@ -255,10 +253,10 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                   required
                   min="0"
                   step="0.01"
-                  className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 />
               </div>
-              <div className="col-span-1 text-right font-medium text-foreground">
+              <div className="col-span-1 text-right font-medium text-[#D9D9D9]">
                 ₹{(item.quantity * item.unitPrice).toFixed(2)}
               </div>
               <div className="col-span-1">
@@ -266,8 +264,9 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
                   <button
                     type="button"
                     onClick={() => removeItem(index)}
-                    className="text-red-600 hover:text-red-800 font-heading"
+                    className="flex items-center gap-1 text-[#BFBFBF] hover:text-red-400 font-semibold transition-colors"
                   >
+                    <Trash2 className="w-4 h-4" />
                     Remove
                   </button>
                 )}
@@ -275,21 +274,21 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
             </div>
           ))}
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-6">
-        <h3 className="text-2xl font-heading text-foreground mb-6">Totals</h3>
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-2xl font-bold text-[#D9D9D9] mb-6">Totals</h3>
         
         <div className="space-y-4">
           <div className="flex justify-between">
-            <span className="text-secondary">Subtotal:</span>
-            <span className="font-medium text-foreground">
+            <span className="text-[#8C8C8C]">Subtotal:</span>
+            <span className="font-medium text-[#D9D9D9]">
               ₹{totals.subtotal.toFixed(2)}
             </span>
           </div>
           
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Discount (%)
             </label>
             <input
@@ -299,15 +298,15 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
               min="0"
               max="100"
               step="0.01"
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
             />
-            <div className="text-right mt-1 text-sm text-secondary">
+            <div className="text-right mt-1 text-sm text-[#8C8C8C]">
               Discount: ₹{totals.discount.toFixed(2)}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Tax Rate (%)
             </label>
             <input
@@ -316,65 +315,67 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
               onChange={(e) => setFormData({ ...formData, taxRate: parseFloat(e.target.value) || 0 })}
               min="0"
               step="0.01"
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
             />
-            <div className="text-right mt-1 text-sm text-secondary">
+            <div className="text-right mt-1 text-sm text-[#8C8C8C]">
               Tax: ₹{totals.tax.toFixed(2)}
             </div>
           </div>
 
-          <div className="pt-4 border-t border-border flex justify-between text-lg font-bold">
-            <span className="text-foreground">Total:</span>
-            <span className="text-foreground">
+          <div className="pt-4 border-t border-[#BFBFBF]/10 flex justify-between text-lg font-bold">
+            <span className="text-[#D9D9D9]">Total:</span>
+            <span className="bg-gradient-to-r from-[#D9D9D9] to-[#BFBFBF] bg-clip-text text-transparent">
               ₹{totals.total.toFixed(2)}
             </span>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-6">
-        <h3 className="text-2xl font-heading text-foreground mb-6">Additional Information</h3>
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-2xl font-bold text-[#D9D9D9] mb-6">Additional Information</h3>
         
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Notes
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               rows={4}
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-heading text-foreground mb-2">
+            <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
               Terms & Conditions
             </label>
             <textarea
               value={formData.terms}
               onChange={(e) => setFormData({ ...formData, terms: e.target.value })}
               rows={4}
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 resize-none"
               placeholder="Payment terms, late fees, etc."
             />
           </div>
         </div>
-      </Card>
+      </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <button
           type="submit"
           disabled={loading}
-          className="bg-accent text-white px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-accent-hover shadow-depth-3 hover:shadow-depth-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base w-full sm:w-auto"
         >
+          <Save className="w-4 h-4" />
           {loading ? 'Saving...' : invoiceId ? 'Update Invoice' : 'Create Invoice'}
         </button>
         <a
           href="/admin/invoices"
-          className="bg-gray-200 text-gray-700 px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-gray-300"
+          className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#BFBFBF] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:text-[#D9D9D9] border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 text-sm sm:text-base w-full sm:w-auto"
         >
+          <X className="w-4 h-4" />
           Cancel
         </a>
       </div>

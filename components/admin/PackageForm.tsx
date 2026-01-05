@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Card from '@/components/Card'
+import { Save, X, Plus, Trash2 } from 'lucide-react'
 
 interface PackageFormProps {
   packageId?: string
@@ -132,15 +132,15 @@ export default function PackageForm({ packageId }: PackageFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card className="p-6">
-        <h3 className="text-2xl font-heading text-foreground mb-6">
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C] bg-clip-text text-transparent mb-6">
           {packageId ? 'Edit Package' : 'Create New Package'}
         </h3>
 
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Package Name *
               </label>
               <input
@@ -153,13 +153,13 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                   }
                 }}
                 required
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 placeholder="e.g., Starter Package"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Slug *
               </label>
               <input
@@ -167,7 +167,7 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                 required
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 placeholder="e.g., starter-package"
               />
             </div>
@@ -182,7 +182,7 @@ export default function PackageForm({ packageId }: PackageFormProps) {
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               required
               rows={4}
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 resize-none"
               placeholder="Full description of the package"
             />
           </div>
@@ -202,7 +202,7 @@ export default function PackageForm({ packageId }: PackageFormProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Price
               </label>
               <input
@@ -210,20 +210,20 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                 step="0.01"
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 placeholder="0.00"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Price Type *
               </label>
               <select
                 value={formData.priceType}
                 onChange={(e) => setFormData({ ...formData, priceType: e.target.value })}
                 required
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               >
                 <option value="MONTHLY">Monthly</option>
                 <option value="ONE_TIME">One Time</option>
@@ -233,14 +233,14 @@ export default function PackageForm({ packageId }: PackageFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Display Order
               </label>
               <input
                 type="number"
                 value={formData.displayOrder}
                 onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 0 })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
             </div>
           </div>
@@ -251,18 +251,18 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                 type="checkbox"
                 checked={formData.startsFrom}
                 onChange={(e) => setFormData({ ...formData, startsFrom: e.target.checked })}
-                className="w-5 h-5 text-accent rounded focus:ring-accent"
+                className="w-5 h-5 rounded border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] text-[#D9D9D9] focus:ring-[#D9D9D9]/20"
               />
-              <span className="text-foreground font-heading">Show "Starts from" prefix</span>
+              <span className="text-[#BFBFBF] font-semibold">Show "Starts from" prefix</span>
             </label>
-            <p className="text-sm text-secondary mt-1 ml-8">
+            <p className="text-sm text-[#8C8C8C] mt-1 ml-8">
               Enable this for packages like website development where price varies based on features and requirements
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Discount (%)
               </label>
               <input
@@ -272,13 +272,13 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                 max="100"
                 value={formData.discount}
                 onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 placeholder="0"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Original Price
               </label>
               <input
@@ -286,7 +286,7 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                 step="0.01"
                 value={formData.originalPrice}
                 onChange={(e) => setFormData({ ...formData, originalPrice: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 placeholder="0.00"
               />
             </div>
@@ -305,16 +305,17 @@ export default function PackageForm({ packageId }: PackageFormProps) {
             />
           </div>
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-6">
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-heading text-foreground">Features</h3>
+          <h3 className="text-xl font-bold text-[#D9D9D9]">Features</h3>
           <button
             type="button"
             onClick={addFeature}
-            className="bg-accent text-white px-4 py-2 rounded-lg font-heading hover:bg-accent-hover transition-colors"
+            className="flex items-center gap-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-4 py-2 rounded-lg font-semibold hover:border-[#D9D9D9]/30 border border-[#BFBFBF]/20 transition-all duration-300"
           >
+            <Plus className="w-4 h-4" />
             Add Feature
           </button>
         </div>
@@ -327,42 +328,43 @@ export default function PackageForm({ packageId }: PackageFormProps) {
                 value={feature.name}
                 onChange={(e) => updateFeature(index, 'name', e.target.value)}
                 placeholder="Feature name"
-                className="flex-1 border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="flex-1 border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
               <label className="flex items-center gap-2 px-4 py-3">
                 <input
                   type="checkbox"
                   checked={feature.included}
                   onChange={(e) => updateFeature(index, 'included', e.target.checked)}
-                  className="w-4 h-4 text-accent rounded focus:ring-accent"
+                  className="w-4 h-4 rounded border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] text-[#D9D9D9] focus:ring-[#D9D9D9]/20"
                 />
-                <span className="text-sm text-secondary">Included</span>
+                <span className="text-sm text-[#8C8C8C]">Included</span>
               </label>
               {formData.features.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeFeature(index)}
-                  className="text-red-600 hover:text-red-800 px-3 py-3"
+                  className="flex items-center gap-1 text-[#BFBFBF] hover:text-red-400 px-3 py-3 transition-colors"
                 >
+                  <Trash2 className="w-4 h-4" />
                   Remove
                 </button>
               )}
             </div>
           ))}
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-6">
-        <h3 className="text-xl font-heading text-foreground mb-4">Settings</h3>
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-xl font-bold text-[#D9D9D9] mb-4">Settings</h3>
         <div className="space-y-4">
           <label className="flex items-center gap-3">
             <input
               type="checkbox"
               checked={formData.isActive}
               onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-              className="w-5 h-5 text-accent rounded focus:ring-accent"
+              className="w-5 h-5 rounded border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] text-[#D9D9D9] focus:ring-[#D9D9D9]/20"
             />
-            <span className="text-foreground font-heading">Active</span>
+            <span className="text-[#BFBFBF] font-semibold">Active</span>
           </label>
 
           <label className="flex items-center gap-3">
@@ -370,26 +372,28 @@ export default function PackageForm({ packageId }: PackageFormProps) {
               type="checkbox"
               checked={formData.isFeatured}
               onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-              className="w-5 h-5 text-accent rounded focus:ring-accent"
+              className="w-5 h-5 rounded border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] text-[#D9D9D9] focus:ring-[#D9D9D9]/20"
             />
-            <span className="text-foreground font-heading">Featured</span>
+            <span className="text-[#BFBFBF] font-semibold">Featured</span>
           </label>
         </div>
-      </Card>
+      </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <button
           type="submit"
           disabled={loading}
-          className="bg-accent text-white px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-accent-hover shadow-depth-3 hover:shadow-depth-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base w-full sm:w-auto"
         >
+          <Save className="w-4 h-4" />
           {loading ? 'Saving...' : packageId ? 'Update Package' : 'Create Package'}
         </button>
         <button
           type="button"
           onClick={() => router.push('/admin/packages')}
-          className="bg-gray-200 text-gray-700 px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-gray-300"
+          className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#BFBFBF] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:text-[#D9D9D9] border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 text-sm sm:text-base w-full sm:w-auto"
         >
+          <X className="w-4 h-4" />
           Cancel
         </button>
       </div>

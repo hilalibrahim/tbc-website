@@ -8,7 +8,7 @@ export const metadata = {
 export default function NewEmployeePage() {
   return (
     <div>
-      <h1 className="mb-4 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl font-heading text-foreground">Add New Employee</h1>
+      <h1 className="mb-4 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl font-heading text-[#BFBFBF]">Add New Employee</h1>
       <EmployeeForm />
     </div>
   )

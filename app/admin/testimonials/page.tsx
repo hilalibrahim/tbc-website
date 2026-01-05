@@ -63,7 +63,7 @@ export default function TestimonialsPage() {
       ),
     },
     { header: 'Author', accessor: 'author' },
-    { header: 'Company', accessor: 'company' || 'N/A' },
+    { header: 'Company', accessor: (row: Testimonial) => row.company || 'N/A' },
     {
       header: 'Rating',
       accessor: (row: Testimonial) =>
@@ -74,16 +74,16 @@ export default function TestimonialsPage() {
       accessor: (row: Testimonial) => (
         <div className="flex gap-2">
           <span
-            className={`px-2 py-1 text-xs rounded-full ${
+            className={`px-2 py-1 text-xs font-semibold rounded-full ${
               row.isPublished
-                ? 'bg-green-100 text-green-800'
-                : 'bg-gray-100 text-gray-800'
+                ? 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#D9D9D9] border border-[#BFBFBF]/20'
+                : 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
             }`}
           >
             {row.isPublished ? 'Published' : 'Draft'}
           </span>
           {row.featured && (
-            <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
+            <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#BFBFBF] border border-[#BFBFBF]/20">
               Featured
             </span>
           )}

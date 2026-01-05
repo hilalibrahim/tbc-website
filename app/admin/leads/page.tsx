@@ -43,25 +43,25 @@ export default function LeadsPage() {
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      NEW: 'bg-blue-100 text-blue-800',
-      CONTACTED: 'bg-yellow-100 text-yellow-800',
-      QUALIFIED: 'bg-purple-100 text-purple-800',
-      CONVERTED: 'bg-green-100 text-green-800',
-      LOST: 'bg-red-100 text-red-800',
+      NEW: 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] border border-[#BFBFBF]/20',
+      CONTACTED: 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#BFBFBF] border border-[#BFBFBF]/20',
+      QUALIFIED: 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] border border-[#BFBFBF]/20',
+      CONVERTED: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#D9D9D9] border border-[#BFBFBF]/20',
+      LOST: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-red-400 border border-red-400/20',
     }
-    return colors[status] || 'bg-gray-100 text-gray-800'
+    return colors[status] || 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
   }
 
   const columns = [
     { header: 'Name', accessor: 'name' },
     { header: 'Email', accessor: 'email' },
-    { header: 'Company', accessor: 'company' || 'N/A' },
-    { header: 'Phone', accessor: 'phone' || 'N/A' },
-    { header: 'Service', accessor: 'service' || 'N/A' },
+    { header: 'Company', accessor: (row: Lead) => row.company || 'N/A' },
+    { header: 'Phone', accessor: (row: Lead) => row.phone || 'N/A' },
+    { header: 'Service', accessor: (row: Lead) => row.service || 'N/A' },
     {
       header: 'Status',
       accessor: (row: Lead) => (
-        <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(row.status)}`}>
+        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(row.status)}`}>
           {row.status}
         </span>
       ),
@@ -74,15 +74,15 @@ export default function LeadsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex gap-4">
+      <div className="flex gap-2 sm:gap-3 flex-wrap">
         {['all', 'NEW', 'CONTACTED', 'QUALIFIED', 'CONVERTED', 'LOST'].map((status) => (
           <button
             key={status}
             onClick={() => setFilter(status)}
-            className={`px-4 py-2 rounded-lg transition-colors font-heading ${
+            className={`px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 font-semibold text-xs sm:text-sm ${
               filter === status
-                ? 'bg-accent text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] border border-[#D9D9D9]/30'
+                : 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/20 hover:text-[#D9D9D9] hover:border-[#D9D9D9]/30'
             }`}
           >
             {status.charAt(0) + status.slice(1).toLowerCase()}

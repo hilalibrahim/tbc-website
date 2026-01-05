@@ -8,7 +8,7 @@ export const metadata = {
 export default function NewPackagePage() {
   return (
     <div>
-      <h1 className="mb-8 text-4xl font-heading text-foreground">Create New Package</h1>
+      <h1 className="mb-8 text-4xl font-heading text-[#BFBFBF]">Create New Package</h1>
       <PackageForm />
     </div>
   )

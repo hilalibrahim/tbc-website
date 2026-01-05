@@ -46,12 +46,12 @@ export default function OrdersPage() {
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      PENDING: 'bg-yellow-100 text-yellow-800',
-      PAID: 'bg-green-100 text-green-800',
-      CANCELLED: 'bg-red-100 text-red-800',
-      REFUNDED: 'bg-gray-100 text-gray-800',
+      PENDING: 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#BFBFBF] border border-[#BFBFBF]/20',
+      PAID: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#D9D9D9] border border-[#BFBFBF]/20',
+      CANCELLED: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-red-400 border border-red-400/20',
+      REFUNDED: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10',
     }
-    return colors[status] || 'bg-gray-100 text-gray-800'
+    return colors[status] || 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
   }
 
   const columns = [
@@ -60,8 +60,8 @@ export default function OrdersPage() {
       header: 'Client',
       accessor: (row: Order) => (
         <div>
-          <div className="font-medium">{row.lead.name}</div>
-          <div className="text-sm text-secondary">{row.lead.email}</div>
+          <div className="font-medium text-[#D9D9D9]">{row.lead.name}</div>
+          <div className="text-sm text-[#8C8C8C]">{row.lead.email}</div>
         </div>
       ),
     },
@@ -76,7 +76,7 @@ export default function OrdersPage() {
     {
       header: 'Status',
       accessor: (row: Order) => (
-        <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(row.status)}`}>
+        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(row.status)}`}>
           {row.status}
         </span>
       ),

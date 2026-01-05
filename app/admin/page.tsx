@@ -1,4 +1,3 @@
-import Card from '@/components/Card'
 import Link from 'next/link'
 
 async function getStats() {
@@ -77,78 +76,88 @@ export default async function AdminDashboard() {
   ]
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-4xl font-heading text-foreground">Dashboard</h1>
-        <p className="mt-2 text-secondary">Welcome to your admin dashboard</p>
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-3 mb-6">
+          <div className="w-12 h-px bg-gradient-to-r from-[#D9D9D9] to-transparent"></div>
+          <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Admin Dashboard</span>
+          <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#D9D9D9]"></div>
+        </div>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
+            Dashboard
+          </span>
+        </h1>
+        <p className="text-xl text-[#BFBFBF] max-w-2xl mx-auto">Welcome to your admin dashboard</p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {statCards.map((stat, index) => (
           <Link key={index} href={stat.href}>
-            <Card className="h-full p-6 hover:shadow-depth-4 transition-all duration-300 cursor-pointer">
+            <div className="group relative h-full p-6 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 hover:border-[#D9D9D9]/30 transition-all duration-300 hover:scale-[1.02] cursor-pointer">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-secondary mb-1">{stat.title}</p>
-                  <p className="text-3xl font-heading text-foreground">{stat.value}</p>
-                  <p className="text-sm text-green-600 mt-1">{stat.change}</p>
+                  <p className="text-sm text-[#8C8C8C] mb-1">{stat.title}</p>
+                  <p className="text-3xl font-bold bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C] bg-clip-text text-transparent">{stat.value}</p>
+                  <p className="text-sm text-[#BFBFBF] mt-1">{stat.change}</p>
                 </div>
-                <div className={`${stat.color} w-16 h-16 rounded-xl flex items-center justify-center text-3xl`}>
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] border border-[#BFBFBF]/10 flex items-center justify-center text-3xl">
                   {stat.icon}
                 </div>
               </div>
-            </Card>
+            </div>
           </Link>
         ))}
       </div>
 
       {/* Quick Actions */}
-      <Card className="p-6">
-        <h2 className="text-2xl font-heading text-foreground mb-4">Quick Actions</h2>
+      <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10">
+        <h2 className="text-2xl font-bold text-[#D9D9D9] mb-6">Quick Actions</h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
           {quickActions.map((action, index) => (
             <Link
               key={index}
               href={action.href}
-              className="flex flex-col items-center justify-center p-4 border-2 border-border rounded-xl hover:border-accent hover:bg-accent/5 transition-all duration-300"
+              className="group flex flex-col items-center justify-center p-4 border border-[#BFBFBF]/10 rounded-xl bg-gradient-to-br from-[#0A0A0A] to-[#151515] hover:border-[#D9D9D9]/30 hover:bg-gradient-to-br hover:from-[#151515] hover:to-[#1A1A1A] transition-all duration-300"
             >
               <span className="text-4xl mb-2">{action.icon}</span>
-              <span className="text-sm font-heading text-foreground text-center">
+              <span className="text-sm font-semibold text-[#BFBFBF] group-hover:text-[#D9D9D9] text-center">
                 {action.label}
               </span>
             </Link>
           ))}
         </div>
-      </Card>
+      </div>
 
       {/* Recent Activity */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <Card className="p-6">
-          <h2 className="text-2xl font-heading text-foreground mb-4">Recent Leads</h2>
+        <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10">
+          <h2 className="text-2xl font-bold text-[#D9D9D9] mb-4">Recent Leads</h2>
           <div className="space-y-3">
-            <p className="text-secondary text-center py-8">No recent leads</p>
+            <p className="text-[#8C8C8C] text-center py-8">No recent leads</p>
           </div>
           <Link
             href="/admin/leads"
-            className="mt-4 block text-center text-accent hover:text-accent-hover font-heading"
+            className="mt-4 block text-center text-[#BFBFBF] hover:text-[#D9D9D9] font-semibold transition-colors"
           >
             View All Leads →
           </Link>
-        </Card>
+        </div>
 
-        <Card className="p-6">
-          <h2 className="text-2xl font-heading text-foreground mb-4">Recent Orders</h2>
+        <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10">
+          <h2 className="text-2xl font-bold text-[#D9D9D9] mb-4">Recent Orders</h2>
           <div className="space-y-3">
-            <p className="text-secondary text-center py-8">No recent orders</p>
+            <p className="text-[#8C8C8C] text-center py-8">No recent orders</p>
           </div>
           <Link
             href="/admin/orders"
-            className="mt-4 block text-center text-accent hover:text-accent-hover font-heading"
+            className="mt-4 block text-center text-[#BFBFBF] hover:text-[#D9D9D9] font-semibold transition-colors"
           >
             View All Orders →
           </Link>
-        </Card>
+        </div>
       </div>
     </div>
   )

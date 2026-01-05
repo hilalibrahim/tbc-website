@@ -41,15 +41,15 @@ export default function BlogPage() {
   const columns = [
     { header: 'Title', accessor: 'title' },
     { header: 'Slug', accessor: 'slug' },
-    { header: 'Category', accessor: 'category' || 'N/A' },
+    { header: 'Category', accessor: (row: BlogPost) => row.category || 'N/A' },
     {
       header: 'Status',
       accessor: (row: BlogPost) => (
         <span
-          className={`px-2 py-1 text-xs rounded-full ${
+          className={`px-2 py-1 text-xs font-semibold rounded-full ${
             row.isPublished
-              ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] border border-[#BFBFBF]/20'
+              : 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
           }`}
         >
           {row.isPublished ? 'Published' : 'Draft'}

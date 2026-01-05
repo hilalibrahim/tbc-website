@@ -54,8 +54,30 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(packagesWithParsedFeatures)
   } catch (error) {
     console.error('Error fetching packages:', error)
+    
+    // Check if it's a Prisma connection error
+    if (error instanceof Error) {
+      if (error.message.includes('P1001') || error.message.includes('connect')) {
+        return NextResponse.json(
+          { 
+            error: 'Database connection failed. Please ensure the database is set up correctly.',
+            details: 'Run: npx prisma generate && npx prisma migrate dev'
+          },
+          { status: 503 }
+        )
+      }
+      
+      if (error.message.includes('P2002') || error.message.includes('unique')) {
+        return NextResponse.json(
+          { error: 'Database constraint error', details: error.message },
+          { status: 400 }
+        )
+      }
+    }
+    
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch packages'
     return NextResponse.json(
-      { error: 'Failed to fetch packages' },
+      { error: errorMessage },
       { status: 500 }
     )
   }

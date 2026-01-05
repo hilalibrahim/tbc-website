@@ -42,12 +42,12 @@ export default function CustomPackagesPage() {
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      PENDING: 'bg-yellow-100 text-yellow-800',
-      APPROVED: 'bg-green-100 text-green-800',
-      REJECTED: 'bg-red-100 text-red-800',
-      QUOTED: 'bg-blue-100 text-blue-800',
+      PENDING: 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] border border-[#BFBFBF]/20',
+      APPROVED: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#D9D9D9] border border-[#BFBFBF]/20',
+      REJECTED: 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-red-400 border border-red-400/20',
+      QUOTED: 'bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#BFBFBF] border border-[#BFBFBF]/20',
     }
-    return colors[status] || 'bg-gray-100 text-gray-800'
+    return colors[status] || 'bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#8C8C8C] border border-[#BFBFBF]/10'
   }
 
   const columns = [
@@ -64,7 +64,7 @@ export default function CustomPackagesPage() {
     {
       header: 'Status',
       accessor: (row: CustomPackage) => (
-        <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(row.status)}`}>
+        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(row.status)}`}>
           {row.status}
         </span>
       ),

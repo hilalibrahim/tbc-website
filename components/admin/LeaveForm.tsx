@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Card from '@/components/Card'
+import { Save, X } from 'lucide-react'
 
 interface LeaveFormProps {
   leaveId?: string
@@ -117,15 +117,15 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card className="p-6">
-        <h3 className="text-2xl font-heading text-foreground mb-6">
+      <div className="p-6 rounded-xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C] bg-clip-text text-transparent mb-6">
           {leaveId ? 'Edit Leave Request' : 'Create Leave Request'}
         </h3>
 
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Employee *
               </label>
               <select
@@ -133,7 +133,7 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
                 onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })}
                 required
                 disabled={!!employeeId}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent disabled:bg-gray-100"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <option value="">Select Employee</option>
                 {employees.map((emp) => (
@@ -145,14 +145,14 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Leave Type *
               </label>
               <select
                 value={formData.type}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                 required
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               >
                 <option value="VACATION">Vacation</option>
                 <option value="SICK">Sick Leave</option>
@@ -165,7 +165,7 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Start Date *
               </label>
               <input
@@ -173,12 +173,12 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
                 value={formData.startDate}
                 onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                 required
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 End Date *
               </label>
               <input
@@ -187,19 +187,19 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
                 onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
                 required
                 min={formData.startDate}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Days
               </label>
               <input
                 type="number"
                 value={formData.days}
                 readOnly
-                className="w-full border border-border bg-gray-50 px-4 py-3 rounded-xl text-foreground"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#8C8C8C] opacity-50"
               />
             </div>
           </div>
@@ -212,19 +212,19 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
               value={formData.reason}
               onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
               rows={3}
-              className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] placeholder-[#8C8C8C] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20 resize-none"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Status
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
               >
                 <option value="PENDING">Pending</option>
                 <option value="APPROVED">Approved</option>
@@ -233,34 +233,36 @@ export default function LeaveForm({ leaveId, employeeId }: LeaveFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-heading text-foreground mb-2">
+              <label className="block text-sm font-semibold text-[#BFBFBF] mb-2">
                 Approved By
               </label>
               <input
                 type="text"
                 value={formData.approvedBy}
                 onChange={(e) => setFormData({ ...formData, approvedBy: e.target.value })}
-                className="w-full border border-border bg-white px-4 py-3 rounded-xl text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
                 placeholder="Manager name"
               />
             </div>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <button
           type="submit"
           disabled={loading}
-          className="bg-accent text-white px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-accent-hover shadow-depth-3 hover:shadow-depth-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base w-full sm:w-auto"
         >
+          <Save className="w-4 h-4" />
           {loading ? 'Saving...' : leaveId ? 'Update Leave' : 'Create Leave Request'}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="bg-gray-200 text-gray-700 px-8 py-4 rounded-xl font-heading transition-all duration-300 hover:bg-gray-300"
+          className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#0A0A0A] to-[#1A1A1A] text-[#BFBFBF] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 hover:text-[#D9D9D9] border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 text-sm sm:text-base w-full sm:w-auto"
         >
+          <X className="w-4 h-4" />
           Cancel
         </button>
       </div>
