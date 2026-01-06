@@ -8,7 +8,7 @@ export const metadata = {
 export default function NewInvoicePage() {
   return (
     <div>
-      <h1 className="mb-8 text-4xl font-heading text-foreground">Create New Invoice</h1>
+      <h1 className="mb-8 text-4xl font-heading text-[#BFBFBF]">Create New Invoice</h1>
       <InvoiceForm />
     </div>
   )

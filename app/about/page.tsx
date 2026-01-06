@@ -4,6 +4,9 @@ import Card from '@/components/Card';
 import CTA from '@/components/CTA';
 import Link from 'next/link';
 import { Users, Target, TrendingUp, Award, Sparkles, Zap, Heart, Shield, Globe, Clock, Star, ArrowRight, Building, MapPin, Search, Rocket, Brain } from 'lucide-react';
+import AnimatedText from '@/components/AnimatedText';
+import AnimatedCard from '@/components/AnimatedCard';
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default function AboutPage() {
   const leadershipTeam = [
@@ -149,24 +152,24 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - The Big Connection */}
             <div>
-              <div className="flex items-center gap-3 mb-6">
+              <AnimatedText delay={0.1} className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-px bg-gradient-to-r from-[#D9D9D9] to-transparent"></div>
                 <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">A Venture by Pitstopia</span>
-              </div>
+              </AnimatedText>
               
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+              <AnimatedText as="h1" delay={0.2} className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
                 <span className="text-[#D9D9D9]">DIGITAL MARKETING</span>
                 <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                   FOR EVERY INDUSTRY
                 </span>
-              </h1>
+              </AnimatedText>
               
-              <p className="text-xl text-[#BFBFBF] max-w-xl mb-8">
+              <AnimatedText as="p" delay={0.3} className="text-xl text-[#BFBFBF] max-w-xl mb-8">
                 Born from Pitstopia's success in travel tech, The Big Connection now provides comprehensive digital marketing solutions to businesses across all industries.
-              </p>
+              </AnimatedText>
               
-              <div className="flex flex-wrap gap-4">
+              <AnimatedSection delay={0.4} className="flex flex-wrap gap-4">
                 <Link
                   href="/services"
                   className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden border border-[#D9D9D9]/30"
@@ -184,14 +187,14 @@ export default function AboutPage() {
                   <Building className="w-4 h-4" />
                   <span>Visit Pitstopia</span>
                 </Link>
-              </div>
+              </AnimatedSection>
             </div>
 
             {/* Right Column - Pitstopia Connection */}
-            <div className="relative">
+            <AnimatedCard delay={0.5} className="relative">
               <div className="absolute -inset-4 bg-gradient-to-tr from-[#D9D9D9]/10 via-transparent to-[#BFBFBF]/10 rounded-3xl blur-2xl opacity-30"></div>
               <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#D9D9D9]/20 backdrop-blur-sm">
-                <div className="flex items-center gap-4 mb-6">
+                <AnimatedText delay={0.6} className="flex items-center gap-4 mb-6">
                   <div className="p-3 rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] border border-[#D9D9D9]/30">
                     <Building className="w-6 h-6 text-[#D9D9D9]" />
                   </div>
@@ -199,25 +202,27 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-[#D9D9D9]">From Pitstopia to All Industries</h2>
                     <p className="text-[#8C8C8C]">Our Origin Story</p>
                   </div>
-                </div>
+                </AnimatedText>
                 
-                <p className="text-lg text-[#BFBFBF] mb-6 leading-relaxed">
+                <AnimatedText as="p" delay={0.7} className="text-lg text-[#BFBFBF] mb-6 leading-relaxed">
                   We began as the digital marketing team for Pitstopia, India's premier travel utility app. Our success in growing Pitstopia led us to expand our expertise to serve businesses across all industries.
-                </p>
+                </AnimatedText>
                 
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <AnimatedSection staggerChildren={true} className="grid grid-cols-2 gap-4 mb-6">
                   {pitstopiaServices.map((service, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] border border-[#BFBFBF]/10">
-                      <span className="text-2xl">{service.icon}</span>
-                      <div>
-                        <div className="text-sm font-semibold text-[#D9D9D9]">{service.title}</div>
-                        <div className="text-xs text-[#8C8C8C]">{service.description}</div>
+                    <AnimatedCard key={index} index={index}>
+                      <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] border border-[#BFBFBF]/10">
+                        <span className="text-2xl">{service.icon}</span>
+                        <div>
+                          <div className="text-sm font-semibold text-[#D9D9D9]">{service.title}</div>
+                          <div className="text-xs text-[#8C8C8C]">{service.description}</div>
+                        </div>
                       </div>
-                    </div>
+                    </AnimatedCard>
                   ))}
-                </div>
+                </AnimatedSection>
               </div>
-            </div>
+            </AnimatedCard>
           </div>
         </div>
       </section>
@@ -225,79 +230,74 @@ export default function AboutPage() {
       {/* Industries We Serve */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#0A0A0A] to-[#151515] py-32">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.1} className="inline-flex items-center gap-2 mb-6">
               <Globe className="w-5 h-5 text-[#D9D9D9]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Our Expertise</span>
               <Globe className="w-5 h-5 text-[#D9D9D9]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.2} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 Serving All Industries
               </span>
-            </h2>
-            <p className="text-xl text-[#BFBFBF] max-w-2xl mx-auto mb-12">
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.3} className="text-xl text-[#BFBFBF] max-w-2xl mx-auto mb-12">
               From our roots in travel tech to expertise across every sector, we deliver results regardless of your industry.
-            </p>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <AnimatedSection staggerChildren={true} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {industriesWeServe.map((industry, index) => (
-              <div 
-                key={index}
-                className="group relative"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300 group-hover:scale-[1.02] h-full">
-                  <div className="text-4xl mb-4">{industry.icon}</div>
-                  <h3 className="text-xl font-bold text-[#D9D9D9] mb-4">{industry.category}</h3>
-                  <ul className="space-y-2">
-                    {industry.examples.map((example, idx) => (
-                      <li key={idx} className="text-sm text-[#BFBFBF] flex items-center">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#D9D9D9] to-[#BFBFBF] mr-2"></div>
-                        {example}
-                      </li>
-                    ))}
-                  </ul>
+              <AnimatedCard key={index} index={index}>
+                <div className="group relative h-full">
+                  <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300 group-hover:scale-[1.02] h-full">
+                    <div className="text-4xl mb-4">{industry.icon}</div>
+                    <h3 className="text-xl font-bold text-[#D9D9D9] mb-4">{industry.category}</h3>
+                    <ul className="space-y-2">
+                      {industry.examples.map((example, idx) => (
+                        <li key={idx} className="text-sm text-[#BFBFBF] flex items-center">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#D9D9D9] to-[#BFBFBF] mr-2"></div>
+                          {example}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
 
-          <div className="text-center mt-12">
+          <AnimatedText delay={0.2} className="text-center mt-12">
             <p className="text-lg text-[#8C8C8C]">
               <span className="text-[#D9D9D9] font-semibold">Don't see your industry listed?</span> We have expertise in virtually every sector.
             </p>
-          </div>
+          </AnimatedText>
         </div>
       </section>
 
       {/* Leadership Team - Co-Founders */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#151515] to-[#0A0A0A] py-32">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="flex items-center justify-center gap-4 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.1} className="flex items-center justify-center gap-4 mb-6">
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#D9D9D9] to-transparent"></div>
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">The Founders</span>
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#D9D9D9] to-transparent"></div>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.2} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 Meet The Co-Founders
               </span>
-            </h2>
-            <p className="text-xl text-[#BFBFBF] max-w-2xl mx-auto">
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.3} className="text-xl text-[#BFBFBF] max-w-2xl mx-auto">
               The visionary team behind both Pitstopia and The Big Connection
-            </p>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <AnimatedSection staggerChildren={true} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {leadershipTeam.map((member, index) => (
-              <div 
-                key={index}
-                className="group relative h-full"
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
+              <AnimatedCard key={index} index={index}>
+                <div className="group relative h-full">
                 {/* Card */}
                 <div className="relative h-full rounded-2xl overflow-hidden border border-[#BFBFBF]/10 group-hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] p-6 transition-all duration-300 group-hover:scale-[1.02]">
                   {/* Icon */}
@@ -329,14 +329,15 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
 
-          <div className="text-center mt-12 pt-12 border-t border-[#BFBFBF]/10">
+          <AnimatedText delay={0.2} className="text-center mt-12 pt-12 border-t border-[#BFBFBF]/10">
             <p className="text-lg text-[#BFBFBF] max-w-3xl mx-auto">
               Together, this team successfully built Pitstopia from the ground up and now brings that same expertise to help businesses across all industries achieve digital success.
             </p>
-          </div>
+          </AnimatedText>
         </div>
       </section>
 
@@ -359,121 +360,123 @@ export default function AboutPage() {
         </div>
         
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.1} className="inline-flex items-center gap-2 mb-6">
               <Sparkles className="w-5 h-5 text-[#FF8E3C]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Our Evolution</span>
               <Sparkles className="w-5 h-5 text-[#FF8E3C]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.2} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#BFBFBF] via-[#FF8E3C] to-[#FF6B35]">
                 From One to Many
               </span>
-            </h2>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="group relative p-8 rounded-2xl border border-[#BFBFBF]/10 hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] transition-all duration-300 hover:scale-[1.02]">
-              <div className="relative mb-6">
-                <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
-                <div className="relative text-4xl">🚀</div>
+          <AnimatedSection staggerChildren={true} className="grid md:grid-cols-3 gap-8">
+            <AnimatedCard index={0}>
+              <div className="group relative p-8 rounded-2xl border border-[#BFBFBF]/10 hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] transition-all duration-300 hover:scale-[1.02]">
+                <div className="relative mb-6">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
+                  <div className="relative text-4xl">🚀</div>
+                </div>
+                <h3 className="text-xl font-bold text-[#BFBFBF] mb-4 group-hover:text-[#FF8E3C] transition-colors">The Beginning</h3>
+                <p className="text-[#8C8C8C]">
+                  Started as the internal marketing team for Pitstopia, mastering digital growth in the travel tech space.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-[#BFBFBF] mb-4 group-hover:text-[#FF8E3C] transition-colors">The Beginning</h3>
-              <p className="text-[#8C8C8C]">
-                Started as the internal marketing team for Pitstopia, mastering digital growth in the travel tech space.
-              </p>
-            </div>
+            </AnimatedCard>
             
-            <div className="group relative p-8 rounded-2xl border border-[#BFBFBF]/10 hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] transition-all duration-300 hover:scale-[1.02]">
-              <div className="relative mb-6">
-                <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
-                <div className="relative text-4xl">📈</div>
+            <AnimatedCard index={1}>
+              <div className="group relative p-8 rounded-2xl border border-[#BFBFBF]/10 hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] transition-all duration-300 hover:scale-[1.02]">
+                <div className="relative mb-6">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
+                  <div className="relative text-4xl">📈</div>
+                </div>
+                <h3 className="text-xl font-bold text-[#BFBFBF] mb-4 group-hover:text-[#FF8E3C] transition-colors">Proven Success</h3>
+                <p className="text-[#8C8C8C]">
+                  Successfully scaled Pitstopia to become India's leading travel utility app through innovative digital strategies.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-[#BFBFBF] mb-4 group-hover:text-[#FF8E3C] transition-colors">Proven Success</h3>
-              <p className="text-[#8C8C8C]">
-                Successfully scaled Pitstopia to become India's leading travel utility app through innovative digital strategies.
-              </p>
-            </div>
+            </AnimatedCard>
             
-            <div className="group relative p-8 rounded-2xl border border-[#BFBFBF]/10 hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] transition-all duration-300 hover:scale-[1.02]">
-              <div className="relative mb-6">
-                <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
-                <div className="relative text-4xl">🌍</div>
+            <AnimatedCard index={2}>
+              <div className="group relative p-8 rounded-2xl border border-[#BFBFBF]/10 hover:border-[#FF8E3C]/30 bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] transition-all duration-300 hover:scale-[1.02]">
+                <div className="relative mb-6">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
+                  <div className="relative text-4xl">🌍</div>
+                </div>
+                <h3 className="text-xl font-bold text-[#BFBFBF] mb-4 group-hover:text-[#FF8E3C] transition-colors">Expanding Horizons</h3>
+                <p className="text-[#8C8C8C]">
+                  Now applying our proven digital marketing expertise to help businesses across all industries achieve growth.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-[#BFBFBF] mb-4 group-hover:text-[#FF8E3C] transition-colors">Expanding Horizons</h3>
-              <p className="text-[#8C8C8C]">
-                Now applying our proven digital marketing expertise to help businesses across all industries achieve growth.
-              </p>
-            </div>
-          </div>
+            </AnimatedCard>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Stats Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#151515] to-[#0A0A0A] py-32">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <AnimatedSection staggerChildren={true} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div 
-                key={index}
-                className="group relative"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-br opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl blur"></div>
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300 group-hover:scale-[1.02] text-center">
-                  <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${stat.color} bg-opacity-10 mb-4`}>
-                    <div className="text-[#D9D9D9]">
-                      {stat.icon}
+              <AnimatedCard key={index} index={index}>
+                <div className="group relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-br opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl blur"></div>
+                  <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300 group-hover:scale-[1.02] text-center">
+                    <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${stat.color} bg-opacity-10 mb-4`}>
+                      <div className="text-[#D9D9D9]">
+                        {stat.icon}
+                      </div>
                     </div>
+                    <div className="text-4xl font-bold text-[#D9D9D9] mb-2">{stat.value}</div>
+                    <div className="text-lg font-semibold text-[#BFBFBF] mb-1">{stat.label}</div>
+                    <div className="text-sm text-[#8C8C8C]">{stat.description}</div>
                   </div>
-                  <div className="text-4xl font-bold text-[#D9D9D9] mb-2">{stat.value}</div>
-                  <div className="text-lg font-semibold text-[#BFBFBF] mb-1">{stat.label}</div>
-                  <div className="text-sm text-[#8C8C8C]">{stat.description}</div>
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Values Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#0A0A0A] to-[#151515] py-32">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.1} className="inline-flex items-center gap-3 mb-6">
               <Heart className="w-5 h-5 text-[#D9D9D9]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Our Approach</span>
               <Heart className="w-5 h-5 text-[#D9D9D9]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.2} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 How We Deliver Results
               </span>
-            </h2>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <AnimatedSection staggerChildren={true} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value, index) => (
-              <div 
-                key={index}
-                className="group relative"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300 text-center">
-                  <div className="relative mb-6">
-                    <div className="absolute -inset-2 bg-gradient-to-br opacity-0 group-hover:opacity-20 rounded-xl blur transition-opacity duration-300"></div>
-                    <div className={`relative inline-flex p-4 rounded-xl bg-gradient-to-br ${value.gradient} bg-opacity-10`}>
-                      <div className="text-[#D9D9D9]">
-                        {value.icon}
+              <AnimatedCard key={index} index={index}>
+                <div className="group relative">
+                  <div className="relative p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300 text-center">
+                    <div className="relative mb-6">
+                      <div className="absolute -inset-2 bg-gradient-to-br opacity-0 group-hover:opacity-20 rounded-xl blur transition-opacity duration-300"></div>
+                      <div className={`relative inline-flex p-4 rounded-xl bg-gradient-to-br ${value.gradient} bg-opacity-10`}>
+                        <div className="text-[#D9D9D9]">
+                          {value.icon}
+                        </div>
                       </div>
                     </div>
+                    <h3 className="text-xl font-bold text-[#D9D9D9] mb-3">{value.title}</h3>
+                    <p className="text-[#BFBFBF]">{value.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-[#D9D9D9] mb-3">{value.title}</h3>
-                  <p className="text-[#BFBFBF]">{value.description}</p>
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 

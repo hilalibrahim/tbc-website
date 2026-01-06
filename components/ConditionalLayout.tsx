@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import PageTransition from '@/components/PageTransition'
 
 interface ConditionalLayoutProps {
   children: React.ReactNode
@@ -15,7 +16,9 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   return (
     <>
       {!isAdminRoute && <Navigation />}
-      {children}
+      <PageTransition>
+        {children}
+      </PageTransition>
       {!isAdminRoute && <Footer />}
     </>
   )

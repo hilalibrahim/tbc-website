@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, TrendingUp, BarChart3, Target, Zap, Network, Link2 } from 'lucide-react';
+import AnimatedText from '@/components/AnimatedText';
+import AnimatedCard from '@/components/AnimatedCard';
+import AnimatedSection from '@/components/AnimatedSection';
 
 interface HeroProps {
   headline: string;
@@ -66,8 +69,8 @@ export default function Hero({
       {/* Main Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pt-20 pb-12 sm:pb-16 lg:pb-0">
         {/* Agency Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-8 sm:mt-12 lg:mt-16 mb-0">
-          <div className="flex items-center gap-2">
+        <AnimatedSection className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-8 sm:mt-12 lg:mt-16 mb-0">
+          <AnimatedText delay={0.1} className="flex items-center gap-2">
             <Link2 className="w-6 h-6 sm:w-8 sm:h-8 text-[#D9D9D9]" />
             <div className="text-xl sm:text-2xl font-bold">
               <span className="text-[#D9D9D9]">THE BIG</span>
@@ -75,40 +78,36 @@ export default function Hero({
                 CONNECTION
               </span>
             </div>
-          </div>
-          <div className="text-xs sm:text-sm text-[#8C8C8C] tracking-widest hidden sm:block">CONNECTING BRANDS TO GROWTH</div>
-        </div>
+          </AnimatedText>
+          <AnimatedText delay={0.2} className="text-xs sm:text-sm text-[#8C8C8C] tracking-widest hidden sm:block">CONNECTING BRANDS TO GROWTH</AnimatedText>
+        </AnimatedSection>
         
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center -mt-2">
           {/* Left Column - Strategy & Growth Focus */}
           <div className="lg:col-span-6 space-y-6 sm:space-y-8">
             {/* Agency Value Proposition */}
-            <div className="inline-flex items-center gap-3 mb-6">
+            <AnimatedText delay={0.2} className="inline-flex items-center gap-3 mb-6">
               <div className="w-12 h-px bg-gradient-to-r from-[#D9D9D9] to-transparent"></div>
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Digital Growth Architects</span>
               <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#D9D9D9]"></div>
-            </div>
+            </AnimatedText>
             
             {/* Headline */}
-            <div className="space-y-3 sm:space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
-                  {headline}
-                </span>
-              </h1>
-            </div>
+            <AnimatedText as="h1" delay={0.3} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
+                {headline}
+              </span>
+            </AnimatedText>
             
             {/* Subheadline */}
             {subheadline && (
-              <div className="space-y-4 sm:space-y-6">
-                <p className="text-lg sm:text-xl text-[#BFBFBF] leading-relaxed max-w-2xl">
-                  {subheadline}
-                </p>
-              </div>
+              <AnimatedText as="p" delay={0.4} className="text-lg sm:text-xl text-[#BFBFBF] leading-relaxed max-w-2xl">
+                {subheadline}
+              </AnimatedText>
             )}
             
             {/* CTA Section */}
-            <div className="space-y-4 sm:space-y-6 pt-2 sm:pt-4">
+            <AnimatedSection delay={0.5} className="space-y-4 sm:space-y-6 pt-2 sm:pt-4">
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                 <Link
                   href={ctaLink}
@@ -145,11 +144,11 @@ export default function Hero({
                   <div className="text-xs sm:text-sm text-[#BFBFBF]/60 mt-1">Client Retention</div>
                 </div>
               </div> */}
-            </div>
+            </AnimatedSection>
           </div>
           
           {/* Right Column - Connection Visualization */}
-          <div className="lg:col-span-6 relative mt-8 lg:mt-0">
+          <AnimatedCard delay={0.6} className="lg:col-span-6 relative mt-8 lg:mt-0">
             {/* Main Visualization Container */}
             <div className="relative">
               {/* Connection Network Background */}
@@ -266,21 +265,21 @@ export default function Hero({
               </div>
               
               {/* Floating Connection Elements - Hidden on mobile, shown on larger screens */}
-              <div className="hidden md:block absolute -left-4 top-1/3 transform -translate-y-1/2">
+              <AnimatedCard delay={0.8} className="hidden md:block absolute -left-4 top-1/3 transform -translate-y-1/2">
                 <div className="w-32 sm:w-36 p-3 sm:p-4 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] backdrop-blur-md border border-[#BFBFBF]/20 rounded-xl shadow-xl">
                   <div className="text-[10px] sm:text-xs text-[#8C8C8C] mb-1 uppercase tracking-wider">STRATEGIC CONNECTION</div>
                   <div className="text-xs sm:text-sm text-[#BFBFBF]">Brand ↔ Audience</div>
                 </div>
-              </div>
+              </AnimatedCard>
               
-              <div className="hidden md:block absolute -right-4 bottom-1/4">
+              <AnimatedCard delay={0.9} className="hidden md:block absolute -right-4 bottom-1/4">
                 <div className="w-32 sm:w-36 p-3 sm:p-4 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] backdrop-blur-md border border-[#BFBFBF]/20 rounded-xl shadow-xl">
                   <div className="text-[10px] sm:text-xs text-[#8C8C8C] mb-1 uppercase tracking-wider">NETWORK EFFECT</div>
                   <div className="text-xs sm:text-sm text-[#BFBFBF]">Data-Driven Growth</div>
                 </div>
-              </div>
+              </AnimatedCard>
             </div>
-          </div>
+          </AnimatedCard>
         </div>
       </div>
       

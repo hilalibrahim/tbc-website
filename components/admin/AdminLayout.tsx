@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import PageTransition from '@/components/PageTransition'
 import { 
   LayoutDashboard, 
   Package, 
@@ -195,7 +196,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           {/* Content Container */}
           <div className="p-3 sm:p-4 lg:p-6 xl:p-8">
             <div className="rounded-xl sm:rounded-2xl border border-[#BFBFBF]/10 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] p-4 sm:p-5 lg:p-6">
-              {children}
+              <PageTransition>
+                {children}
+              </PageTransition>
             </div>
           </div>
         </main>

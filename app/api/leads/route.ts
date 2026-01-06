@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
 
     const leads = await prisma.lead.findMany({
       where: {
-        ...(status && { status: status as any }),
+        ...(status && status !== 'all' && { status: status as any }),
       },
       orderBy: {
         createdAt: 'desc',
@@ -58,10 +58,21 @@ export async function GET(request: NextRequest) {
     })
 
     return NextResponse.json(leads)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching leads:', error)
+    
+    // Provide more detailed error messages
+    let errorMessage = 'Failed to fetch leads'
+    if (error?.code === 'P2002') {
+      errorMessage = 'Database constraint violation'
+    } else if (error?.code === 'P1001') {
+      errorMessage = 'Database connection error. Please check your database connection.'
+    } else if (error?.message) {
+      errorMessage = error.message
+    }
+    
     return NextResponse.json(
-      { error: 'Failed to fetch leads' },
+      { error: errorMessage },
       { status: 500 }
     )
   }

@@ -17,6 +17,7 @@ interface Lead {
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<string>('all')
 
   useEffect(() => {
@@ -24,17 +25,21 @@ export default function LeadsPage() {
   }, [filter])
 
   const fetchLeads = async () => {
+    setLoading(true)
+    setError(null)
     try {
       const url = filter !== 'all' ? `/api/leads?status=${filter}` : '/api/leads'
       const res = await fetch(url)
       if (!res.ok) {
-        throw new Error('Failed to fetch leads')
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }))
+        throw new Error(errorData.error || `Failed to fetch leads: ${res.status} ${res.statusText}`)
       }
       const data = await res.json()
       // Ensure data is an array
       setLeads(Array.isArray(data) ? data : [])
     } catch (error) {
       console.error('Error fetching leads:', error)
+      setError(error instanceof Error ? error.message : 'Failed to fetch leads')
       setLeads([]) // Set empty array on error
     } finally {
       setLoading(false)
@@ -89,12 +94,25 @@ export default function LeadsPage() {
           </button>
         ))}
       </div>
+      {error && (
+        <div className="p-4 rounded-xl border border-red-400/20 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A]">
+          <p className="text-red-400 text-sm">{error}</p>
+          <button
+            onClick={fetchLeads}
+            className="mt-2 px-4 py-2 bg-gradient-to-r from-[#1A1A1A] to-[#2A2A2A] text-[#D9D9D9] rounded-lg border border-[#BFBFBF]/20 hover:border-[#D9D9D9]/30 transition-all duration-300 text-sm font-semibold"
+          >
+            Retry
+          </button>
+        </div>
+      )}
       <DataTable
         title="Leads"
         columns={columns}
         data={leads}
         loading={loading}
+        createLink="/admin/leads/new"
         viewLink={(row) => `/admin/leads/${row.id}`}
+        editLink={(row) => `/admin/leads/${row.id}/edit`}
       />
     </div>
   )

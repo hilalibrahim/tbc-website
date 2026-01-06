@@ -166,10 +166,17 @@ export default function InvoiceForm({ invoiceId, orderId, leadId, onSuccess }: I
               onChange={(e) => setFormData({ ...formData, leadId: e.target.value })}
               required
               className="w-full border border-[#BFBFBF]/20 bg-gradient-to-br from-[#0A0A0A] to-[#151515] px-4 py-3 rounded-xl text-[#D9D9D9] focus:border-[#D9D9D9]/50 focus:outline-none focus:ring-1 focus:ring-[#D9D9D9]/20"
+              style={{
+                color: '#D9D9D9',
+              }}
             >
-              <option value="">Select a client</option>
+              <option value="" style={{ color: '#D9D9D9', backgroundColor: '#0A0A0A' }}>Select a client</option>
               {leads.map((lead) => (
-                <option key={lead.id} value={lead.id}>
+                <option 
+                  key={lead.id} 
+                  value={lead.id}
+                  style={{ color: '#D9D9D9', backgroundColor: '#0A0A0A' }}
+                >
                   {lead.name} {lead.company && `(${lead.company})`}
                 </option>
               ))}

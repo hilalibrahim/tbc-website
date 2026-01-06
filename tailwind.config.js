@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Ghrathe', 'serif'],
+        heading: ['BebasNeue', 'sans-serif'],
         sans: ['Nexa', 'system-ui', 'sans-serif'],
       },
       colors: {

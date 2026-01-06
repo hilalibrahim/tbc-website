@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
@@ -5,11 +7,9 @@ import TestimonialCard from '@/components/TestimonialCard';
 import CTA from '@/components/CTA';
 import Link from 'next/link';
 import { ArrowRight, TrendingUp, Users, Clock, Target, Award, Star, Sparkles, Zap, BarChart3, Globe, Palette, Megaphone } from 'lucide-react';
-
-export const metadata = {
-  title: 'Home - The Big Connection | Digital Growth Architects',
-  description: 'Transform your digital presence with data-driven marketing solutions. Strategic connections for exceptional growth.',
-};
+import AnimatedText from '@/components/AnimatedText';
+import AnimatedCard from '@/components/AnimatedCard';
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default function Home() {
   const services = [
@@ -138,86 +138,85 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.2} className="inline-flex items-center gap-2 mb-6">
               <Sparkles className="w-5 h-5 text-[#D9D9D9]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Our Expertise</span>
               <Sparkles className="w-5 h-5 text-[#D9D9D9]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.3} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 Strategic Services
               </span>
-            </h2>
-            <p className="text-xl text-[#BFBFBF] max-w-2xl mx-auto">
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.4} className="text-xl text-[#BFBFBF] max-w-2xl mx-auto">
               Comprehensive solutions designed to architect sustainable growth
-            </p>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
           {/* Services Grid */}
-          <div className="grid gap-8 md:grid-cols-3">
+          <AnimatedSection staggerChildren={true} className="grid gap-8 md:grid-cols-3">
             {services.map((service, index) => (
-              <ServiceCard
-                key={index}
-                title={service.title}
-                description={service.description}
-                features={service.features}
-                ctaText="Learn More"
-                ctaLink="/services"
-                featured={service.featured}
-                variant="dark"
-              />
+              <AnimatedCard key={index} index={index}>
+                <ServiceCard
+                  title={service.title}
+                  description={service.description}
+                  features={service.features}
+                  ctaText="Learn More"
+                  ctaLink="/services"
+                  featured={service.featured}
+                  variant="dark"
+                />
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Why Choose Us */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#151515] to-[#0A0A0A] py-32">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="flex items-center justify-center gap-4 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.2} className="flex items-center justify-center gap-4 mb-6">
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#D9D9D9] to-transparent"></div>
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Why We're Different</span>
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#D9D9D9] to-transparent"></div>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.3} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 The Big Difference
               </span>
-            </h2>
-            <p className="text-xl text-[#BFBFBF] max-w-3xl mx-auto">
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.4} className="text-xl text-[#BFBFBF] max-w-3xl mx-auto">
               We don't just execute campaigns—we architect growth ecosystems that deliver sustainable results
-            </p>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
           {/* Features Grid with Hover Effects */}
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <AnimatedSection staggerChildren={true} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
-              <div 
-                key={index}
-                className="group relative"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                {/* Floating Card Effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl blur"></div>
-                <div className="relative h-full p-6 rounded-xl bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] border border-[#BFBFBF]/10 group-hover:border-[#FF8E3C]/30 transition-all duration-300 group-hover:scale-[1.02]">
-                  {/* Icon Container */}
-                  <div className="relative mb-6">
-                    <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
-                    <div className="relative p-4 rounded-lg bg-gradient-to-br from-[#FF6B35]/10 to-[#FF8E3C]/10 inline-flex border border-[#FF8E3C]/20">
-                      <div className="text-[#FF8E3C]">
-                        {feature.icon}
+              <AnimatedCard key={index} index={index}>
+                <div className="group relative">
+                  {/* Floating Card Effect */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl blur"></div>
+                  <div className="relative h-full p-6 rounded-xl bg-gradient-to-br from-[#0A0A0A] via-[#151515] to-[#0A0A0A] border border-[#BFBFBF]/10 group-hover:border-[#FF8E3C]/30 transition-all duration-300 group-hover:scale-[1.02]">
+                    {/* Icon Container */}
+                    <div className="relative mb-6">
+                      <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8E3C]/20 to-[#FF6B35]/20 opacity-0 group-hover:opacity-40 rounded-xl blur transition-opacity duration-300"></div>
+                      <div className="relative p-4 rounded-lg bg-gradient-to-br from-[#FF6B35]/10 to-[#FF8E3C]/10 inline-flex border border-[#FF8E3C]/20">
+                        <div className="text-[#FF8E3C]">
+                          {feature.icon}
+                        </div>
                       </div>
                     </div>
+                    
+                    <h3 className="text-xl font-bold text-[#BFBFBF] mb-3 group-hover:text-[#FF8E3C] transition-colors">{feature.title}</h3>
+                    <p className="text-[#8C8C8C]">{feature.description}</p>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-[#BFBFBF] mb-3 group-hover:text-[#FF8E3C] transition-colors">{feature.title}</h3>
-                  <p className="text-[#8C8C8C]">{feature.description}</p>
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -234,28 +233,30 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.2} className="inline-flex items-center gap-2 mb-6">
               <TrendingUp className="w-5 h-5 text-[#D9D9D9]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Success Stories</span>
               <TrendingUp className="w-5 h-5 text-[#D9D9D9]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.3} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 Impactful Results
               </span>
-            </h2>
-            <p className="text-xl text-[#BFBFBF] max-w-2xl mx-auto mb-8">
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.4} className="text-xl text-[#BFBFBF] max-w-2xl mx-auto mb-8">
               Real results from real clients across multiple industries
-            </p>
-            <Link
-              href="/portfolio"
-              className="group inline-flex items-center gap-2 text-[#BFBFBF] hover:text-[#D9D9D9] font-semibold transition-colors"
-            >
-              View All Studies
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
+            </AnimatedText>
+            <AnimatedText delay={0.5}>
+              <Link
+                href="/portfolio"
+                className="group inline-flex items-center gap-2 text-[#BFBFBF] hover:text-[#D9D9D9] font-semibold transition-colors"
+              >
+                View All Studies
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </AnimatedText>
+          </AnimatedSection>
 
           {/* Case Studies Timeline */}
           <div className="relative">
@@ -263,12 +264,12 @@ export default function Home() {
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#D9D9D9]/20 to-transparent"></div>
             
             {caseStudies.map((study, index) => (
-              <div 
-                key={index}
-                className={`relative mb-16 md:mb-24 ${
-                  index % 2 === 0 ? 'md:pr-1/2 md:pl-0 md:text-right' : 'md:pl-1/2 md:pr-0'
-                }`}
-              >
+              <AnimatedCard key={index} index={index} delay={0.2}>
+                <div 
+                  className={`relative mb-16 md:mb-24 ${
+                    index % 2 === 0 ? 'md:pr-1/2 md:pl-0 md:text-right' : 'md:pl-1/2 md:pr-0'
+                  }`}
+                >
                 {/* Timeline Dot */}
                 <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-[#D9D9D9] to-[#BFBFBF] border-4 border-[#0A0A0A] z-10"></div>
                 
@@ -305,6 +306,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -313,27 +315,24 @@ export default function Home() {
       {/* Testimonials */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#151515] to-[#0A0A0A] py-32">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.2} className="inline-flex items-center gap-2 mb-6">
               <Star className="w-5 h-5 text-[#D9D9D9]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Client Love</span>
               <Star className="w-5 h-5 text-[#D9D9D9]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.3} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 Trusted Voices
               </span>
-            </h2>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
           {/* Testimonials Grid */}
-          <div className="grid gap-8 md:grid-cols-3">
+          <AnimatedSection staggerChildren={true} className="grid gap-8 md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="group relative"
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
+              <AnimatedCard key={index} index={index}>
+                <div className="group relative">
                 <div className="absolute -inset-0.5 bg-gradient-to-br from-[#D9D9D9]/20 to-[#BFBFBF]/20 opacity-0 group-hover:opacity-30 rounded-2xl blur transition-opacity duration-300"></div>
                 <div className="relative h-full p-8 rounded-2xl bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#BFBFBF]/10 group-hover:border-[#D9D9D9]/30 transition-all duration-300">
                   {/* Quote Icon */}
@@ -359,8 +358,9 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -377,28 +377,29 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
+          <AnimatedSection className="text-center mb-20">
+            <AnimatedText delay={0.2} className="inline-flex items-center gap-2 mb-6">
               <BarChart3 className="w-5 h-5 text-[#D9D9D9]" />
               <span className="text-sm font-semibold tracking-widest text-[#8C8C8C] uppercase">Our Impact</span>
               <BarChart3 className="w-5 h-5 text-[#D9D9D9]" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            </AnimatedText>
+            <AnimatedText as="h2" delay={0.3} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#D9D9D9] via-[#BFBFBF] to-[#8C8C8C]">
                 By The Numbers
               </span>
-            </h2>
-          </div>
+            </AnimatedText>
+          </AnimatedSection>
 
           {/* Stats Grid with Animated Numbers */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <AnimatedSection staggerChildren={true} className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { label: 'Brands Connected', value: '250+', icon: <Users className="w-6 h-6" /> },
               { label: 'Growth Multiplier', value: '3.2x', icon: <TrendingUp className="w-6 h-6" /> },
               { label: 'Client Retention', value: '98%', icon: <Award className="w-6 h-6" /> },
               { label: 'Project Success', value: '100%', icon: <Target className="w-6 h-6" /> },
             ].map((stat, index) => (
-              <div key={index} className="text-center group">
+              <AnimatedCard key={index} index={index}>
+                <div className="text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] border border-[#BFBFBF]/10 mb-6 group-hover:border-[#D9D9D9]/30 transition-all duration-300">
                   <div className="text-[#D9D9D9]">
                     {stat.icon}
@@ -411,8 +412,9 @@ export default function Home() {
                   {stat.label}
                 </div>
               </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
